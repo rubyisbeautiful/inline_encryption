@@ -1,5 +1,5 @@
 module InlineEncryption
 
-  class MissingRequiredVariable < StandardError; end
+  class MissingRequiredVariableError < StandardError; end
 
 end

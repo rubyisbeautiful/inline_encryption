@@ -5,14 +5,20 @@ require 'base64'
 
 module InlineEncryption
 
+  # known configuration variables
+  # key - a String containing the private key, a filename pointing to the private key, or an OpenSSL::PKey::RSA
   class Config < Hash
     include Hashie::Extensions::IndifferentAccess
     include Hashie::Extensions::MethodAccess
 
+    # checks required, currently only the 'key'
+    # @raises [InlineEncryption::MissingRequiredVariableError] raise on a missing variable
     def check_required_variables
-      raise MissingRequiredVariable.new("missing variable: 'key'") unless self.has_key?(:key)
+      raise MissingRequiredVariableError.new("missing variable: 'key'") unless self.has_key?(:key)
     end
 
+
+    # @return [OpenSSL::PKey::RSA] the OpenSSL key instance
     def real_key
       case self[:key]
         when NilClass

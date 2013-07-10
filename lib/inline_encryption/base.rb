@@ -2,6 +2,8 @@ module InlineEncryption
 
   module Base
 
+    # @param [String] encryption target
+    # @return [String] encrypted target
     def encrypt(data)
       config.check_required_variables
 
@@ -10,6 +12,8 @@ module InlineEncryption
     end
 
 
+    # @param [String] decryption target
+    # @return [String] decrypted target
     def decrypt(data)
       config.check_required_variables
 
@@ -18,6 +22,7 @@ module InlineEncryption
     end
 
 
+    # @return [InlineEncryption::Config] the configuration instance
     def config
       @config ||= Config.new
     end
