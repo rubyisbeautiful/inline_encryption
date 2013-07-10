@@ -19,7 +19,7 @@ module InlineEncryption
           nil
         when String
           if File.exists?(self[:key])
-            OpenSSL::PKey::RSA.new(self[:key])
+            OpenSSL::PKey::RSA.new(File.read(self[:key]))
           else
             OpenSSL::PKey::RSA.new(self[:key])
           end
