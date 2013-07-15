@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe InlineEncryption do
-  it 'should have a version number' do
-    InlineEncryption::VERSION.should_not be_nil
+
+  it 'should load Base' do
+    expect{ InlineEncryption::Base }.not_to raise_error
   end
 
-  it 'should do something useful' do
-    false.should be_true
+  it 'should be extended by Base' do
+    InlineEncryption.respond_to?(:config).should be_true
   end
+
 end

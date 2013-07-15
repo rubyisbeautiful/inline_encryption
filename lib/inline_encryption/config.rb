@@ -1,7 +1,6 @@
 require 'hashie/extensions/indifferent_access'
 require 'hashie/extensions/method_access'
 require 'openssl'
-require 'base64'
 
 module InlineEncryption
 
