@@ -25,8 +25,7 @@ module InlineEncryption
       config.check_required_variables
 
       begin
-        encrypted = config.real_key.private_encrypt(data)
-        converted = Base64.encode64(encrypted)
+        encrypt!(data)
       rescue EncryptionFailureError => e
         return fail_text.nil? ? data : fail_text.to_s
       end
