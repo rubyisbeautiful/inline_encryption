@@ -6,7 +6,7 @@ module InlineEncryption
 
     class_option :config, :aliases => ["-c"], :type => :string
 
-    def initialize(args = [], opts = [], config = {})
+    def initialize(args=[], opts=[], config={})
       super(args, opts, config)
 
       if options[:config] && File.exists?(options[:config])
@@ -16,7 +16,9 @@ module InlineEncryption
 
 
     desc "encrypt [DATA]", "encrypt stuff"
+    class_option :require, :aliases => ["-r"], :type => :string
     def encrypt(data)
+      #puts options
       load_enviroment(options[:require])
 
       puts InlineEncryption.encrypt(data)
