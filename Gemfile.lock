@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    inline_encryption (0.0.5)
+    inline_encryption (0.0.6)
       hashie
       thor
 

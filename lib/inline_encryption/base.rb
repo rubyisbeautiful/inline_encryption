@@ -40,7 +40,8 @@ module InlineEncryption
 
       begin
         converted = Base64.decode64(data)
-        decrypted = config.real_key.public_key.public_decrypt(converted)
+        this_key = config.real_key.private? ? config.real_key.public_key : config.real_key
+        decrypted = this_key.public_decrypt(converted)
       rescue => e
         err = DecryptionFailureError.exception "Encrypted: #{data}"
         raise err
