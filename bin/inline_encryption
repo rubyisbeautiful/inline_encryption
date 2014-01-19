@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 # -*- mode: ruby -*-
-require 'rubygems'
-require 'inline_encryption/cli'
+require 'bundler'
+Bundler.setup
+
+require 'inline_encryption'
 
 InlineEncryption::CLI.start(ARGV)

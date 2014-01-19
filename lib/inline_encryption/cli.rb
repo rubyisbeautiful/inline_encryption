@@ -1,25 +1,19 @@
+require 'debugger'
 require 'thor'
 
 module InlineEncryption
 
   class CLI < Thor
 
-    class_option :config, :aliases => ["-c"], :type => :string
-
     def initialize(args=[], opts=[], config={})
       super(args, opts, config)
-
-      if options[:config] && File.exists?(options[:config])
-        @options = YAML.load_file(options[:config]).symbolize_keys.merge(@options.symbolize_keys)
-      end
     end
 
 
-    desc "encrypt [DATA]", "encrypt stuff"
-    class_option :require, :aliases => ["-r"], :type => :string
+    desc 'encrypt [DATA]', 'encrypt stuff'
+    class_option :require, :aliases => ['-r'], :type => :string
     def encrypt(data)
-      #puts options
-      load_enviroment(options[:require])
+      load_environment(options[:require]) if options[:require]
 
       puts InlineEncryption.encrypt(data)
     end
@@ -29,19 +23,8 @@ module InlineEncryption
     protected
 
 
-    def load_enviroment(file=nil)
-      file ||= "."
-
-      if File.directory?(file) && File.exists?(File.expand_path("#{file}/config/environment.rb"))
-        require "rails"
-        require File.expand_path("#{file}/config/environment.rb")
-        if defined?(::Rails) && ::Rails.respond_to?(:application)
-          # Rails 3
-          # ::Rails.application.eager_load!
-        end
-      elsif File.file?(file)
-        require File.expand_path(file)
-      end
+    def load_environment(file)
+      require File.expand_path(file)
     end
 
   end

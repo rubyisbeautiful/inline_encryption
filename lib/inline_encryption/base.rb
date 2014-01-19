@@ -13,13 +13,13 @@ module InlineEncryption
         encrypted = config.real_key.private_encrypt(data)
         converted = Base64.encode64(encrypted)
       rescue => e
-        err = EncryptionFailureError.exception "Target: #{data}"
+        err = EncryptionFailureError.exception I18n.t('target', data: data)
         raise err
       end
     end
 
 
-    # @param [String] encryption target
+    # @param [String] data encryption target
     # @return [String] encrypted target, or fail_text on error (default data)
     def encrypt(data, fail_text=nil)
       config.check_required_variables
@@ -43,14 +43,14 @@ module InlineEncryption
         this_key = config.real_key.private? ? config.real_key.public_key : config.real_key
         decrypted = this_key.public_decrypt(converted)
       rescue => e
-        err = DecryptionFailureError.exception "Encrypted: #{data}"
+        err = DecryptionFailureError.exception I18n.t('encrypted', data)
         raise err
       end
     end
 
 
-    # @param [String] decryption target
-    # @param [String] text to be returned in the case of a decryption failure
+    # @param [String] data decryption target
+    # @param [String] fail_text text to be returned in the case of a decryption failure
     # @return [String] decrypted target
     def decrypt(data, fail_text=nil)
       config.check_required_variables

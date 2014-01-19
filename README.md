@@ -1,4 +1,4 @@
-# inline_encryption [![Build Status](https://travis-ci.org/rubyisbeautiful/inline_encryption.png)](https://travis-ci.org/rubyisbeautiful/inline_encryption)
+# inline_encryption [![Build Status](https://travis-ci.org/rubyisbeautiful/inline_encryption.png)](https://travis-ci.org/rubyisbeautiful/inline_encryption)[![Code Climate](https://codeclimate.com/github/rubyisbeautiful/inline_encryption.png)](https://codeclimate.com/github/rubyisbeautiful/inline_encryption)
 
 Simple encryption relying on convention and designed to be used inline as string replacements.
 

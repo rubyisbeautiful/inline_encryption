@@ -1,0 +1,10 @@
+en:
+  target: 'Target: %{data}'
+  encrypted: 'Encrypted: %{data}'
+  error:
+    missing_key: "missing variable: 'key'"
+es:
+  target: 'Destino: %{data}'
+  encrypted: 'Encriptado: %{data}'
+  error:
+    missing_key: "variable que falta: 'key'"
