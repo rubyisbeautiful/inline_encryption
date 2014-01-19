@@ -36,13 +36,14 @@ describe InlineEncryption::CLI do
   describe 'load_environment' do
 
     before :each do
+      FileUtils.mkdir_p File.dirname(tmp_filename)
       File.open(tmp_filename, 'w') do |file|
         file.puts 'class FooForInlineEncryptionSpec; end'
       end
     end
 
     after :each do
-      FileUtils.rm_f 'spec/tmp/foo.rb'
+      FileUtils.rm_f File.dirname(tmp_filename)
     end
 
     it 'should require the file' do
