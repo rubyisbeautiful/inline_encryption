@@ -13,7 +13,7 @@ module InlineEncryption
     # checks required, currently only the 'key'
     # @raises [InlineEncryption::MissingRequiredVariableError] raise on a missing variable
     def check_required_variables
-      raise MissingRequiredVariableError.new("missing variable: 'key'") unless self.has_key?(:key)
+      raise MissingRequiredVariableError.new(I18n.t('error.missing_key')) unless self.has_key?(:key)
     end
 
 

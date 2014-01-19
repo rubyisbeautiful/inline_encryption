@@ -11,7 +11,7 @@ describe InlineEncryption::Config do
 
     it "should not raise if 'key' is set" do
       subject[:key] = 'foo'
-      expect{ subject.check_required_variables }.to_not raise_error(InlineEncryption::MissingRequiredVariableError)
+      expect{ subject.check_required_variables }.not_to raise_error
     end
 
   end
