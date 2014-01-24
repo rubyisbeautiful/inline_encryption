@@ -1,4 +1,3 @@
-require 'debugger'
 require 'thor'
 
 module InlineEncryption
