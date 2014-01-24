@@ -4,5 +4,6 @@ require 'bundler'
 Bundler.setup
 
 require 'inline_encryption'
+require 'inline_encryption/cli'
 
 InlineEncryption::CLI.start(ARGV)
