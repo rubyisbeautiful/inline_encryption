@@ -7,8 +7,11 @@ gem 'hashie'
 gem 'i18n'
 gem 'thor'
 
-group :development, :test do
+group :debugger do
   gem 'byebug'
+end
+
+group :development, :test do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-spork'
