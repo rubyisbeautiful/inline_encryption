@@ -23,14 +23,14 @@ describe InlineEncryption::Config do
     it 'should return nil if key is NilClass' do
       subject[:key] = nil
 
-      subject.real_key.should == nil
+      expect(subject.real_key).to be_nil
     end
 
     it 'should return the key value if key is an OpenSSL::PKey::RSA key' do
       key = OpenSSL::PKey::RSA.new(128)
       subject[:key] = key
 
-      subject.real_key.should == key
+      expect(subject.real_key).to eq(key)
     end
 
     it 'should return an OpenSSL::PKey::RSA key from the given String' do
@@ -38,19 +38,19 @@ describe InlineEncryption::Config do
       key = temp_key.to_s
       subject[:key] = key
 
-      subject.real_key.to_s.should == temp_key.to_s
-      subject.real_key.should be_an_instance_of OpenSSL::PKey::RSA
+      expect(subject.real_key.to_s).to eq(temp_key.to_s)
+      expect(subject.real_key).to be_an_instance_of OpenSSL::PKey::RSA
     end
 
     it 'should load the contents of the given file if exists and use as key' do
       temp_key = OpenSSL::PKey::RSA.generate(32)
       key = 'foo'
       subject[:key] = key
-      File.stub(:exists?).with('foo').and_return(true)
-      File.stub(:read).with('foo').and_return(temp_key.to_s)
+      allow(File).to receive(:exists?).with('foo').and_return(true)
+      allow(File).to receive(:read).with('foo').and_return(temp_key.to_s)
 
-      subject.real_key.to_s.should == temp_key.to_s
-      subject.real_key.should be_an_instance_of OpenSSL::PKey::RSA
+      expect(subject.real_key.to_s).to eq(temp_key.to_s)
+      expect(subject.real_key).to be_an_instance_of OpenSSL::PKey::RSA
     end
   end
 

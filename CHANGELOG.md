@@ -6,6 +6,7 @@
   - added explicit require for hashie/dash and hashie/extensions/dash/indifferent_access in config.rb
     I think this is probably unnecessary but was getting unresolved name errors in some rubies
   - added explicit require for base64 in base.rb ([Issue #2](https://github.com/rubyisbeautiful/inline_encryption/issues/2))
-  - drop 1.9.x travis testing   
+  - drop 1.9.x travis testing
+  - updated to rspec 3 syntax
   
 # 1.0.3

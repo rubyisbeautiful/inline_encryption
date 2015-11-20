@@ -7,7 +7,7 @@ describe InlineEncryption do
   end
 
   it 'should be extended by Base' do
-    InlineEncryption.respond_to?(:config).should be_true
+    expect(InlineEncryption.respond_to?(:config)).to be_truthy
   end
 
 end
