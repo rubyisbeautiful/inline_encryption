@@ -16,17 +16,17 @@ describe InlineEncryption::Base do
     let(:str){ 'foo' }
 
     it 'should encrypt' do
-      InlineEncryption.encrypt(str).should == Base64.encode64(@default_key.private_encrypt(str))
+      expect(InlineEncryption.encrypt(str)).to eq(Base64.encode64(@default_key.private_encrypt(str)))
     end
 
     it 'should fail to encrpyt and return the target' do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      InlineEncryption.encrypt(str*2).should == str*2
+      expect(InlineEncryption.encrypt(str*2)).to eq(str*2)
     end
 
     it 'should fail to encrypt and return the fail_text' do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      InlineEncryption.encrypt(str*2, 'chunky').should == 'chunky'
+      expect(InlineEncryption.encrypt(str*2, 'chunky')).to eq('chunky')
     end
 
   end
@@ -35,7 +35,7 @@ describe InlineEncryption::Base do
     let(:str){ 'foo' }
 
     it 'should encrypt' do
-      InlineEncryption.encrypt!(str).should == Base64.encode64(@default_key.private_encrypt(str))
+      expect(InlineEncryption.encrypt!(str)).to eq(Base64.encode64(@default_key.private_encrypt(str)))
     end
 
     it 'should fail to encrpyt and raise' do
@@ -52,17 +52,17 @@ describe InlineEncryption::Base do
     end
 
     it 'should decrypt' do
-      InlineEncryption.decrypt(@str).should == 'chunky'
+      expect(InlineEncryption.decrypt(@str)).to eq('chunky')
     end
 
     it 'should fail to decrypt and return the target' do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      InlineEncryption.decrypt(@str).should == @str
+      expect(InlineEncryption.decrypt(@str)).to eq(@str)
     end
 
     it 'should fail to decrypt and return the fail_text' do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      InlineEncryption.decrypt(@str, 'chunky').should == 'chunky'
+      expect(InlineEncryption.decrypt(@str, 'chunky')).to eq('chunky')
     end
 
   end
@@ -74,7 +74,7 @@ describe InlineEncryption::Base do
     end
 
     it 'should decrypt' do
-      InlineEncryption.decrypt!(@str).should == 'chunky'
+      expect(InlineEncryption.decrypt!(@str)).to eq('chunky')
     end
 
     it 'should fail to decrpyt and raise' do

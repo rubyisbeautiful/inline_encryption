@@ -18,7 +18,7 @@ describe InlineEncryption::CLI do
     end
 
     it 'should encrypt' do
-      InlineEncryption.should_receive(:encrypt).with('hello')
+      expect(InlineEncryption).to receive(:encrypt).with('hello')
 
       subject.encrypt('hello')
     end
@@ -26,7 +26,7 @@ describe InlineEncryption::CLI do
     it 'should require a file if passed' do
       subject = InlineEncryption::CLI.new(['foo'], [ '-r', 'foo.rb' ], {})
 
-      subject.should_receive(:load_environment).with('foo.rb')
+      expect(subject).to receive(:load_environment).with('foo.rb')
 
       subject.encrypt('foo')
     end

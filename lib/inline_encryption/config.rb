@@ -1,5 +1,7 @@
 require 'hashie/extensions/indifferent_access'
 require 'hashie/extensions/method_access'
+require 'hashie/extensions/dash/indifferent_access'
+require 'hashie/dash'
 require 'openssl'
 
 module InlineEncryption
