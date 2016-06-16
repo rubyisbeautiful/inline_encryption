@@ -1,3 +1,16 @@
+# 2.0.0
+  - Major backwards compatible change.  A common if perhaps upspoken thought
+  of many good developers I have known is "I hate what I wrote yesterday"
+  Well, for whatever reason (that I cannot recall or even fathom) this gem was
+  originally written using a private key for encrypting a value, and a public
+  key to decrypt.  While that is not itself insecure, it's a terrible
+  practice and makes it easy for humans to make errors.
+  So starting in version 2.0.0 encrpyt methods will use public key and
+  decrypt will use private key, as is conventional
+  - raise on trying to decrypt with a public key
+  - code cleanup (style, remove spork remnant)
+  - bump travis ruby versions to secure versions
+
 # 1.0.5
   - updated gem groups, updated travis to run without debugger and development groups
 # 1.0.4

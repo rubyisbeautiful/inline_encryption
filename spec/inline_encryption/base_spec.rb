@@ -7,16 +7,16 @@ describe InlineEncryption::Base do
     @default_key = OpenSSL::PKey::RSA.generate(2048)
   end
 
-  before :each do
-    InlineEncryption.config[:key] = @default_key
-  end
-
   describe 'encrypt' do
 
     let(:str){ 'foo' }
 
+    before :each do
+      InlineEncryption.config[:key] = @default_key
+    end
+
     it 'should encrypt' do
-      expect(InlineEncryption.encrypt(str)).to eq(Base64.encode64(@default_key.private_encrypt(str)))
+      expect(InlineEncryption.encrypt(str)).not_to eq(str)
     end
 
     it 'should fail to encrpyt and return the target' do
@@ -34,8 +34,12 @@ describe InlineEncryption::Base do
   describe 'encrypt!' do
     let(:str){ 'foo' }
 
+    before :each do
+      InlineEncryption.config[:key] = @default_key
+    end
+
     it 'should encrypt' do
-      expect(InlineEncryption.encrypt!(str)).to eq(Base64.encode64(@default_key.private_encrypt(str)))
+      expect(InlineEncryption.encrypt!(str)).not_to eq(str)
     end
 
     it 'should fail to encrpyt and raise' do
@@ -48,10 +52,11 @@ describe InlineEncryption::Base do
   describe 'decrypt' do
 
     before :all do
-      @str = Base64.encode64(@default_key.private_encrypt('chunky'))
+      @str = Base64.encode64(@default_key.public_encrypt('chunky'))
     end
 
     it 'should decrypt' do
+      InlineEncryption.config[:key] = @default_key
       expect(InlineEncryption.decrypt(@str)).to eq('chunky')
     end
 
@@ -65,15 +70,21 @@ describe InlineEncryption::Base do
       expect(InlineEncryption.decrypt(@str, 'chunky')).to eq('chunky')
     end
 
+    it 'should fail to decrpyt and raise if using a public key to decrypt' do
+      InlineEncryption.config[:key] = @default_key.public_key
+      expect{ InlineEncryption.decrypt('whatevs') }.to raise_error(InlineEncryption::MisconfigurationError)
+    end
+
   end
 
   describe 'decrypt!' do
 
     before :all do
-      @str = Base64.encode64(@default_key.private_encrypt('chunky'))
+      @str = Base64.encode64(@default_key.public_encrypt('chunky'))
     end
 
     it 'should decrypt' do
+      InlineEncryption.config[:key] = @default_key
       expect(InlineEncryption.decrypt!(@str)).to eq('chunky')
     end
 
