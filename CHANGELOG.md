@@ -1,3 +1,5 @@
+# 1.0.4-ci
+  - updated gem groups, updated travis to run without debugger and development groups
 # 1.0.4
   - update version of Bundler to floor 1.7
   - swapped byebug for debugger

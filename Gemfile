@@ -11,13 +11,16 @@ group :debugger do
   gem 'byebug'
 end
 
-group :development, :test do
+group :development do
   gem 'guard'
   gem 'guard-rspec'
-  gem 'guard-spork'
+end 
+
+group :development, :test do
   gem 'rake'
   gem 'redcarpet'
   gem 'rspec'
   gem 'simplecov', require: false
   gem 'yard'
 end
+
