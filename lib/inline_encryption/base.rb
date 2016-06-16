@@ -12,7 +12,7 @@ module InlineEncryption
       config.check_required_variables
 
       begin
-        encrypted = config.real_key.private_encrypt(data)
+        encrypted = config.real_key.public_encrypt(data)
         converted = Base64.encode64(encrypted)
       rescue => e
         err = EncryptionFailureError.exception I18n.t('target', data: data)
@@ -39,11 +39,11 @@ module InlineEncryption
     # @raise [DecryptionFailureError] couldn't decrypt the target
     def decrypt!(data)
       config.check_required_variables
+      raise MisconfigurationError.new(I18n.t('error.pub_key_decrypt')) unless config.real_key.private?
 
       begin
         converted = Base64.decode64(data)
-        this_key = config.real_key.private? ? config.real_key.public_key : config.real_key
-        decrypted = this_key.public_decrypt(converted)
+        decrypted = config.real_key.private_decrypt(converted)
       rescue => e
         err = DecryptionFailureError.exception I18n.t('encrypted', data)
         raise err

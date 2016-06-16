@@ -3,8 +3,10 @@ en:
   encrypted: 'Encrypted: %{data}'
   error:
     missing_key: "missing variable: 'key'"
+    pub_key_decrypt: "Tried to decrypt with a public key.  If you really need this ability, please use version ~> 1.0"
 es:
   target: 'Destino: %{data}'
   encrypted: 'Encriptado: %{data}'
   error:
     missing_key: "variable que falta: 'key'"
+    pub_key_decrypt: "Intentado decriptar con llave publica.  Si de veras necesitas esta capabilidad, favor de user version ~> 1.0"
