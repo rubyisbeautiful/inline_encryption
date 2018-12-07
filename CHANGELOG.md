@@ -1,3 +1,8 @@
+# 2.0.1
+  - update test app to latest Rails 4 to satisfy automated security scan; future versions 
+    will probably drop the included test app
+  - updated travis to drop ruby 2.1, update 2.2 and 2.3 to latest; add ruby 2.4 and 2.5
+    
 # 2.0.0
   - Major backwards compatible change.  A common if perhaps upspoken thought
   of many good developers I have known is "I hate what I wrote yesterday"

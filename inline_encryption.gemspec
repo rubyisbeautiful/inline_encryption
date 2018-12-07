@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'inline_encryption'
   spec.version       = InlineEncryption::VERSION
   spec.authors       = ['rubyisbeautiful']
-  spec.email         = 'bcptaylor@gmail.com'
+  spec.email         = 'bcptaylor+github@gmail.com'
   spec.description   = %q{ A simple encryption tool based on common convention }
   spec.summary       = %q{ A simple encryption tool based on common convention and designed as a drop in for Stringish things }
   spec.homepage      = 'http://github.com/rubyisbeautiful/inline_encryption'
