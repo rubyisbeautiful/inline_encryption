@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gemspec
@@ -15,7 +17,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'rubocop'
-end 
+end
 
 group :development, :test do
   gem 'rake'
@@ -24,4 +26,3 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'yard'
 end
-

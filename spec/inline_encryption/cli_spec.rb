@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'base64'
 require 'inline_encryption/cli'
@@ -7,10 +9,8 @@ def tmp_filename
 end
 
 describe InlineEncryption::CLI do
-
   describe 'initialize' do
-
-    let(:subject){ InlineEncryption::CLI.new }
+    let(:subject) { InlineEncryption::CLI.new }
 
     before :all do
       @default_key = OpenSSL::PKey::RSA.generate(2048)
@@ -24,18 +24,15 @@ describe InlineEncryption::CLI do
     end
 
     it 'should require a file if passed' do
-      subject = InlineEncryption::CLI.new(['foo'], [ '-r', 'foo.rb' ], {})
+      subject = InlineEncryption::CLI.new(['foo'], ['-r', 'foo.rb'], {})
 
       expect(subject).to receive(:load_environment).with('foo.rb')
 
       subject.encrypt('foo')
     end
-
   end
 
-
   describe 'load_environment' do
-
     before :each do
       FileUtils.mkdir_p File.dirname(tmp_filename)
       File.open(tmp_filename, 'w') do |file|
@@ -49,9 +46,7 @@ describe InlineEncryption::CLI do
 
     it 'should require the file' do
       subject.send(:load_environment, tmp_filename)
-      expect{ FooForInlineEncryptionSpec }.not_to raise_error
+      expect { FooForInlineEncryptionSpec }.not_to raise_error
     end
-
   end
-
 end

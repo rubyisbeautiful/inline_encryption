@@ -1,15 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'base64'
 
 describe InlineEncryption::Base do
-
   before :all do
     @default_key = OpenSSL::PKey::RSA.generate(2048)
   end
 
   describe 'encrypt' do
-
-    let(:str){ 'foo' }
+    let(:str) { 'foo' }
 
     before :each do
       InlineEncryption.config[:key] = @default_key
@@ -28,11 +28,10 @@ describe InlineEncryption::Base do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
       expect(InlineEncryption.encrypt(nil, 'chunky')).to eq('chunky')
     end
-
   end
 
   describe 'encrypt!' do
-    let(:str){ 'foo' }
+    let(:str) { 'foo' }
 
     before :each do
       InlineEncryption.config[:key] = @default_key
@@ -44,13 +43,12 @@ describe InlineEncryption::Base do
 
     it 'should fail to encrpyt and raise' do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
-      expect{ InlineEncryption.encrypt!(nil) }.to raise_error(InlineEncryption::EncryptionFailureError)
+      expect { InlineEncryption.encrypt!(nil) }.to raise_error(InlineEncryption::EncryptionFailureError)
     end
-
   end
 
   describe 'decrypt' do
-    let(:str){ Base64.encode64(@default_key.public_encrypt('chunky')) }
+    let(:str) { Base64.encode64(@default_key.public_encrypt('chunky')) }
 
     it 'should decrypt' do
       InlineEncryption.config[:key] = @default_key
@@ -69,13 +67,12 @@ describe InlineEncryption::Base do
 
     it 'should fail to decrpyt and raise if using a public key to decrypt' do
       InlineEncryption.config[:key] = @default_key.public_key
-      expect{ InlineEncryption.decrypt('whatevs') }.to raise_error(InlineEncryption::MisconfigurationError)
+      expect { InlineEncryption.decrypt('whatevs') }.to raise_error(InlineEncryption::MisconfigurationError)
     end
-
   end
 
   describe 'decrypt!' do
-    let(:str){ Base64.encode64(@default_key.public_encrypt('chunky')) }
+    let(:str) { Base64.encode64(@default_key.public_encrypt('chunky')) }
 
     it 'should decrypt' do
       InlineEncryption.config[:key] = @default_key
@@ -84,10 +81,7 @@ describe InlineEncryption::Base do
 
     it 'should fail to decrpyt and raise' do
       InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
-      expect{ InlineEncryption.decrypt!(str) }.to raise_error(InlineEncryption::DecryptionFailureError)
+      expect { InlineEncryption.decrypt!(str) }.to raise_error(InlineEncryption::DecryptionFailureError)
     end
-
   end
-
 end
-

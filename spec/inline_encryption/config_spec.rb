@@ -1,24 +1,23 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe InlineEncryption::Config do
-
   describe 'check_required_values' do
-    let(:subject){ InlineEncryption::Config.new }
+    let(:subject) { InlineEncryption::Config.new }
 
     it "should raise if 'key' is not set" do
-      expect{ subject.check_required_variables }.to raise_error(InlineEncryption::MissingRequiredVariableError)
+      expect { subject.check_required_variables }.to raise_error(InlineEncryption::MissingRequiredVariableError)
     end
 
     it "should not raise if 'key' is set" do
       subject[:key] = 'foo'
-      expect{ subject.check_required_variables }.not_to raise_error
+      expect { subject.check_required_variables }.not_to raise_error
     end
-
   end
 
-
   describe 'real_key' do
-    let(:subject){ InlineEncryption::Config.new }
+    let(:subject) { InlineEncryption::Config.new }
 
     it 'should return nil if key is NilClass' do
       subject[:key] = nil
@@ -53,6 +52,4 @@ describe InlineEncryption::Config do
       expect(subject.real_key).to be_an_instance_of OpenSSL::PKey::RSA
     end
   end
-
-
 end
