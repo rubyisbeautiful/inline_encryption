@@ -45,7 +45,7 @@ module InlineEncryption
         converted = Base64.decode64(data)
         decrypted = config.real_key.private_decrypt(converted)
       rescue => e
-        err = DecryptionFailureError.exception I18n.t('encrypted', data)
+        err = DecryptionFailureError.exception I18n.t('encrypted', data: data)
         raise err
       end
     end

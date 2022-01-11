@@ -20,13 +20,13 @@ describe InlineEncryption::Base do
     end
 
     it 'should fail to encrpyt and return the target' do
-      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      expect(InlineEncryption.encrypt(str*2)).to eq(str*2)
+      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
+      expect(InlineEncryption.encrypt(nil)).to eq(nil)
     end
 
     it 'should fail to encrypt and return the fail_text' do
-      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      expect(InlineEncryption.encrypt(str*2, 'chunky')).to eq('chunky')
+      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
+      expect(InlineEncryption.encrypt(nil, 'chunky')).to eq('chunky')
     end
 
   end
@@ -43,31 +43,28 @@ describe InlineEncryption::Base do
     end
 
     it 'should fail to encrpyt and raise' do
-      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      expect{ InlineEncryption.encrypt!(str*2) }.to raise_error(InlineEncryption::EncryptionFailureError)
+      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
+      expect{ InlineEncryption.encrypt!(nil) }.to raise_error(InlineEncryption::EncryptionFailureError)
     end
 
   end
 
   describe 'decrypt' do
-
-    before :all do
-      @str = Base64.encode64(@default_key.public_encrypt('chunky'))
-    end
+    let(:str){ Base64.encode64(@default_key.public_encrypt('chunky')) }
 
     it 'should decrypt' do
       InlineEncryption.config[:key] = @default_key
-      expect(InlineEncryption.decrypt(@str)).to eq('chunky')
+      expect(InlineEncryption.decrypt(str)).to eq('chunky')
     end
 
     it 'should fail to decrypt and return the target' do
-      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      expect(InlineEncryption.decrypt(@str)).to eq(@str)
+      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
+      expect(InlineEncryption.decrypt(str)).to eq(str)
     end
 
     it 'should fail to decrypt and return the fail_text' do
-      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      expect(InlineEncryption.decrypt(@str, 'chunky')).to eq('chunky')
+      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
+      expect(InlineEncryption.decrypt(str, 'chunky')).to eq('chunky')
     end
 
     it 'should fail to decrpyt and raise if using a public key to decrypt' do
@@ -78,19 +75,16 @@ describe InlineEncryption::Base do
   end
 
   describe 'decrypt!' do
-
-    before :all do
-      @str = Base64.encode64(@default_key.public_encrypt('chunky'))
-    end
+    let(:str){ Base64.encode64(@default_key.public_encrypt('chunky')) }
 
     it 'should decrypt' do
       InlineEncryption.config[:key] = @default_key
-      expect(InlineEncryption.decrypt!(@str)).to eq('chunky')
+      expect(InlineEncryption.decrypt!(str)).to eq('chunky')
     end
 
     it 'should fail to decrpyt and raise' do
-      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(32)
-      expect{ InlineEncryption.decrypt!(@str) }.to raise_error(InlineEncryption::DecryptionFailureError)
+      InlineEncryption.config[:key] = OpenSSL::PKey::RSA.generate(2048)
+      expect{ InlineEncryption.decrypt!(str) }.to raise_error(InlineEncryption::DecryptionFailureError)
     end
 
   end

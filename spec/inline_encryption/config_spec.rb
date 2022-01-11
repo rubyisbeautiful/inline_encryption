@@ -27,14 +27,14 @@ describe InlineEncryption::Config do
     end
 
     it 'should return the key value if key is an OpenSSL::PKey::RSA key' do
-      key = OpenSSL::PKey::RSA.new(128)
+      key = OpenSSL::PKey::RSA.new(512)
       subject[:key] = key
 
       expect(subject.real_key).to eq(key)
     end
 
     it 'should return an OpenSSL::PKey::RSA key from the given String' do
-      temp_key = OpenSSL::PKey::RSA.generate(32)
+      temp_key = OpenSSL::PKey::RSA.generate(512)
       key = temp_key.to_s
       subject[:key] = key
 
@@ -43,7 +43,7 @@ describe InlineEncryption::Config do
     end
 
     it 'should load the contents of the given file if exists and use as key' do
-      temp_key = OpenSSL::PKey::RSA.generate(32)
+      temp_key = OpenSSL::PKey::RSA.generate(512)
       key = 'foo'
       subject[:key] = key
       allow(File).to receive(:exists?).with('foo').and_return(true)

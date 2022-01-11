@@ -1,3 +1,4 @@
+require 'hashie/extensions/ruby_version_check'
 require 'hashie/extensions/indifferent_access'
 require 'hashie/extensions/method_access'
 require 'hashie/extensions/dash/indifferent_access'
