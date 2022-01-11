@@ -45,7 +45,7 @@ describe InlineEncryption::Config do
       temp_key = OpenSSL::PKey::RSA.generate(512)
       key = 'foo'
       subject[:key] = key
-      allow(File).to receive(:exists?).with('foo').and_return(true)
+      allow(File).to receive(:exist?).with('foo').and_return(true)
       allow(File).to receive(:read).with('foo').and_return(temp_key.to_s)
 
       expect(subject.real_key.to_s).to eq(temp_key.to_s)
