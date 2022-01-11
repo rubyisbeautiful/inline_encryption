@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'bundler', '~> 2'
+gem 'bundler', '>= 2.2.33'
 gem 'hashie'
 gem 'i18n'
 gem 'thor'
