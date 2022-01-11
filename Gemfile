@@ -1,20 +1,23 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gemspec
 
-gem 'bundler', '~> 1.7'
+gem 'bundler', '>= 2.2.33'
 gem 'hashie'
 gem 'i18n'
 gem 'thor'
 
 group :debugger do
-  gem 'byebug'
+  gem 'byebug', '~> 11'
 end
 
 group :development do
   gem 'guard'
   gem 'guard-rspec'
-end 
+  gem 'rubocop'
+end
 
 group :development, :test do
   gem 'rake'
@@ -23,4 +26,3 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'yard'
 end
-

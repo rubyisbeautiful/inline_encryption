@@ -1,0 +1,21 @@
+repos:
+-   hooks:
+    -   id: check-added-large-files
+    -   id: check-merge-conflict
+    -   id: check-yaml
+    -   id: detect-aws-credentials
+    -   id: detect-private-key
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+-   hooks:
+    -   id: commitizen
+        stages:
+        - commit-msg
+    repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.20.3
+-   hooks:
+    -   id: rubocop
+    repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 2.1.5

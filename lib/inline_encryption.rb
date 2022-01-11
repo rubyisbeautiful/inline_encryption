@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'i18n'
 require 'base64'
 require 'inline_encryption/version'
@@ -5,6 +7,7 @@ require 'inline_encryption/config'
 require 'inline_encryption/base'
 require 'inline_encryption/errors'
 
+# top level module InlineEncryption
 module InlineEncryption
   extend InlineEncryption::Base
 
@@ -14,6 +17,4 @@ module InlineEncryption
     I18n.enforce_available_locales = false
     @_i18n_initialized_for_ie = true
   end
-
-
 end
